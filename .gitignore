@@ -1,0 +1,48 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# PyCharm
+.idea/
+
+# Migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/*.pyo
+*/migrations/*.log
+
+# Test coverage
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
