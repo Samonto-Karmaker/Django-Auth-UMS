@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'main/home.html')
 
+@login_required(login_url='login')
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
