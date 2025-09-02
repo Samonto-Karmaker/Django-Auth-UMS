@@ -1,12 +1,22 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegisterForm, PostForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .models import Post
 
 # Create your views here.
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'main/home.html')
+    posts = Post.objects.all()
+    if request.method == 'POST':
+        post_id = request.POST.get('post-id')
+        if post_id:
+            post = get_object_or_404(Post, id=post_id)
+            if post.author == request.user:
+                post.delete()
+                print(f"Deleted post with ID: {post_id}")
+        return redirect('home')
+    return render(request, 'main/home.html', {'posts': posts})
 
 @login_required(login_url='login')
 def create_post(request):
