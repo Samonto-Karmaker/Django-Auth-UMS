@@ -12,7 +12,7 @@ def home(request):
         post_id = request.POST.get('post-id')
         if post_id:
             post = get_object_or_404(Post, id=post_id)
-            if post.author == request.user:
+            if post.author == request.user or request.user.has_perm('main.delete_post'):
                 post.delete()
                 print(f"Deleted post with ID: {post_id}")
         return redirect('home')
