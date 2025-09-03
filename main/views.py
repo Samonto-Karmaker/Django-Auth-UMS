@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegisterForm, PostForm
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Post
 
 # Create your views here.
@@ -19,6 +19,7 @@ def home(request):
     return render(request, 'main/home.html', {'posts': posts})
 
 @login_required(login_url='login')
+@permission_required('main.add_post', login_url='login', raise_exception=True)
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
