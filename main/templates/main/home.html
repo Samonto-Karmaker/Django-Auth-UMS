@@ -21,6 +21,20 @@
         </button>
       </form>
       {% endif %}
+      {% if perms.auth.change_user and post.author.is_active and post.author != user %}
+      <form method="post">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn btn-warning"
+          name="user-id"
+          value="{{post.author.id}}"
+          style="margin-top: 5px;"
+        >
+          Ban User
+        </button>
+      </form>
+      {% endif %}
     </div>
   </div>
   <div class="card-footer text-muted">{{post.created_at}}</div>
